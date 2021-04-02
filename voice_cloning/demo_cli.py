@@ -11,66 +11,66 @@ import argparse
 import torch
 import os
 
-if __name__ == '__main__':
-    ## Info & args
-    parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
-    parser.add_argument("-e", "--enc_model_fpath", type=Path, 
-                        default="encoder/saved_models/pretrained.pt",
-                        help="Path to a saved encoder")
-    parser.add_argument("-s", "--syn_model_fpath", type=Path, 
-                        default="synthesizer/saved_models/pretrained/pretrained.pt",
-                        help="Path to a saved synthesizer")
-    parser.add_argument("-v", "--voc_model_fpath", type=Path, 
-                        default="vocoder/saved_models/pretrained/pretrained.pt",
-                        help="Path to a saved vocoder")
-    parser.add_argument("--cpu", action="store_true", help=\
-        "If True, processing is done on CPU, even when a GPU is available.")
-    parser.add_argument("--no_sound", action="store_true", help=\
-        "If True, audio won't be played.")
-    parser.add_argument("--seed", type=int, default=None, help=\
-        "Optional random number seed value to make toolbox deterministic.")
-    parser.add_argument("--no_mp3_support", action="store_true", help=\
-        "If True, disallows loading mp3 files to prevent audioread errors when ffmpeg is not installed.")
-    args = parser.parse_args()
-    print_args(args, parser)
-    if not args.no_sound:
-        import sounddevice as sd
 
-    if args.cpu:
-        # Hide GPUs from Pytorch to force CPU processing
-        os.environ["CUDA_VISIBLE_DEVICES"] = ""
+parser = argparse.ArgumentParser(
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter
+)
+parser.add_argument("-e", "--enc_model_fpath", type=Path, 
+                    default="encoder/saved_models/pretrained.pt",
+                    help="Path to a saved encoder")
+parser.add_argument("-s", "--syn_model_fpath", type=Path, 
+                    default="synthesizer/saved_models/pretrained/pretrained.pt",
+                    help="Path to a saved synthesizer")
+parser.add_argument("-v", "--voc_model_fpath", type=Path, 
+                    default="vocoder/saved_models/pretrained/pretrained.pt",
+                    help="Path to a saved vocoder")
+parser.add_argument("--cpu", action="store_true", help=\
+    "If True, processing is done on CPU, even when a GPU is available.")
+parser.add_argument("--no_sound", action="store_true", help=\
+    "If True, audio won't be played.")
+parser.add_argument("--seed", type=int, default=None, help=\
+    "Optional random number seed value to make toolbox deterministic.")
+parser.add_argument("--no_mp3_support", action="store_true", help=\
+    "If True, disallows loading mp3 files to prevent audioread errors when ffmpeg is not installed.")
+args = parser.parse_args()
+print_args(args, parser)
+if not args.no_sound:
+    import sounddevice as sd
 
-    if torch.cuda.is_available():
-        device_id = torch.cuda.current_device()
-        gpu_properties = torch.cuda.get_device_properties(device_id)
-        ## Print some environment information (for debugging purposes)
-        print("Found %d GPUs available. Using GPU %d (%s) of compute capability %d.%d with "
-            "%.1fGb total memory.\n" % 
-            (torch.cuda.device_count(),
-            device_id,
-            gpu_properties.name,
-            gpu_properties.major,
-            gpu_properties.minor,
-            gpu_properties.total_memory / 1e9))
-    else:
-        print("Using CPU for inference.\n")
+if args.cpu:
+    # Hide GPUs from Pytorch to force CPU processing
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
-    ## Load the models one by one.
-    print("Preparing the encoder, the synthesizer and the vocoder...")
-    encoder.load_model(args.enc_model_fpath)
-    synthesizer = Synthesizer(args.syn_model_fpath)
-    vocoder.load_model(args.voc_model_fpath)
+if torch.cuda.is_available():
+    device_id = torch.cuda.current_device()
+    gpu_properties = torch.cuda.get_device_properties(device_id)
+    ## Print some environment information (for debugging purposes)
+    print("Found %d GPUs available. Using GPU %d (%s) of compute capability %d.%d with "
+        "%.1fGb total memory.\n" % 
+        (torch.cuda.device_count(),
+        device_id,
+        gpu_properties.name,
+        gpu_properties.major,
+        gpu_properties.minor,
+        gpu_properties.total_memory / 1e9))
+else:
+    print("Using CPU for inference.\n")
     
-    print("Interactive generation loop")
-    num_generated = 0
-    while True:
+print("Interactive generation loop")
+num_generated = 0
+
+def generate_coloned_voice(message,sentence):
+    trial = 1
+    while trial:
+        trial -= 1
         try:
-            # Get the reference audio filepath
-            message = "Reference voice: enter an audio filepath of a voice to be cloned (mp3, " \
-                      "wav, m4a, flac, ...):\n"
-            in_fpath = Path(input(message).replace("\"", "").replace("\'", ""))
+            ## Load the models one by one.
+            print("Preparing the encoder, the synthesizer and the vocoder...")
+            encoder.load_model(args.enc_model_fpath)
+            synthesizer = Synthesizer(args.syn_model_fpath)
+            vocoder.load_model(args.voc_model_fpath)
+
+            in_fpath = Path(message.replace("\"", "").replace("\'", ""))
 
             if in_fpath.suffix.lower() == ".mp3" and args.no_mp3_support:
                 print("Can't Use mp3 files please try again:")
@@ -95,7 +95,7 @@ if __name__ == '__main__':
             
             
             ## Generating the spectrogram
-            text = input("Write a sentence (+-20 words) to be synthesized:\n")
+            text = sentence
             
             # If seed is specified, reset torch seed and force synthesizer reload
             if args.seed is not None:
@@ -110,8 +110,7 @@ if __name__ == '__main__':
             specs = synthesizer.synthesize_spectrograms(texts, embeds)
             spec = specs[0]
             print("Created the mel spectrogram")
-            
-            
+
             ## Generating the waveform
             print("Synthesizing the waveform:")
 
@@ -123,8 +122,7 @@ if __name__ == '__main__':
             # Synthesizing the waveform is fairly straightforward. Remember that the longer the
             # spectrogram, the more time-efficient the vocoder.
             generated_wav = vocoder.infer_waveform(spec)
-            
-            
+
             ## Post-generation
             # There's a bug with sounddevice that makes the audio cut one second earlier, so we
             # pad it.
@@ -132,24 +130,15 @@ if __name__ == '__main__':
 
             # Trim excess silences to compensate for gaps in spectrograms (issue #53)
             generated_wav = encoder.preprocess_wav(generated_wav)
-            
-            # Play the audio (non-blocking)
-            if not args.no_sound:
-                try:
-                    sd.stop()
-                    sd.play(generated_wav, synthesizer.sample_rate)
-                except sd.PortAudioError as e:
-                    print("\nCaught exception: %s" % repr(e))
-                    print("Continuing without audio playback. Suppress this message with the \"--no_sound\" flag.\n")
-                except:
-                    raise
                 
             # Save it on the disk
+            global num_generated
             filename = "demo_output_%02d.wav" % num_generated
             print(generated_wav.dtype)
             sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
             num_generated += 1
             print("\nSaved output as %s\n\n" % filename)
+            return filename
         except Exception as e:
             print("Caught exception: %s" % repr(e))
             print("Restarting\n")
