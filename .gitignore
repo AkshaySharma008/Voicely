@@ -1,0 +1,18 @@
+# Deep Learning Models
+*pretrained.pt
+
+voice_cloning/
+
+# Environments
+.env
+.venv
+env/
+
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
