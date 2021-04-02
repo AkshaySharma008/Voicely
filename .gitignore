@@ -1,3 +1,5 @@
+*__pycache__
+
 # Deep Learning Models
 *pretrained.pt
 
@@ -7,11 +9,33 @@
 .venv
 env/
 
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
 # IPython
 profile_default/
 ipython_config.py
 
+# Fast API Git Inore
+.idea
+.ipynb_checkpoints
+.mypy_cache
+.vscode
+__pycache__
+.pytest_cache
+htmlcov
+dist
+site
+.coverage
+coverage.xml
+.netlify
+test.db
+log.txt
+Pipfile.lock
+env3.*
+env
+docs_build
+venv
+docs.zip
+archive.zip
+
+# vim temporary files
+*~
+.*.sw?
