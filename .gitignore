@@ -4,7 +4,6 @@
 voice_cloning/
 
 # Environments
-.env
 .venv
 env/
 
