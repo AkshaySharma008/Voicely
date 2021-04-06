@@ -1,1 +1,19 @@
-<p>voicely works!</p>
+<nb-layout>
+    <nb-layout-header fixed>
+        <a href="#" (click)="toggle()"><nb-icon icon="menu"></nb-icon></a>&nbsp;&nbsp;&nbsp;
+        <h3>Voicely</h3>
+
+        <nb-search type="rotate-layout" style="position:absolute;right: 250px"></nb-search>
+        <div style="position:absolute;right: 50px">
+        <nb-user [name]="user.name" title="Engineer"></nb-user>
+        </div>
+    </nb-layout-header>
+
+    <nb-sidebar>
+        <nb-menu [items]="items"></nb-menu>
+    </nb-sidebar>
+
+    <nb-layout-column class="colored-column-basic">
+        <router-outlet></router-outlet>
+    </nb-layout-column>
+</nb-layout>
