@@ -38,3 +38,4 @@ archive.zip
 # vim temporary files
 *~
 .*.sw?
+.voice_cloning
