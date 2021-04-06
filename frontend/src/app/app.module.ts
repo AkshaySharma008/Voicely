@@ -17,13 +17,17 @@ import {
   NbUserModule
 } from '@nebular/theme';
 import {ReactiveFormsModule} from '@angular/forms';
+import { HomeComponent } from './voicely/home/home.component';
+import { LetsVoicelyComponent } from './voicely/lets-voicely/lets-voicely.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    VoicelyComponent
+    VoicelyComponent,
+    HomeComponent,
+    LetsVoicelyComponent
   ],
   imports: [
     BrowserModule,
