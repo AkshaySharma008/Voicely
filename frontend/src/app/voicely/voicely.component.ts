@@ -28,12 +28,12 @@ export class VoicelyComponent implements OnInit {
     {
       title: 'Clone Voice',
       icon: 'headphones-outline',
-      link: '/app/recycle'
+      link: '/app/clone'
     },
     {
       title: 'Let\'s Voicely',
       icon: 'checkmark-square-outline',
-      link: '/app/history'
+      link: '/app/voicely'
     },
     {
       title: 'Statistics',
@@ -43,7 +43,7 @@ export class VoicelyComponent implements OnInit {
     {
       title: 'My History',
       icon: 'archive-outline',
-      link: '/app/rewards'
+      link: '/app/history'
     },
     {
       title: 'Logout',
