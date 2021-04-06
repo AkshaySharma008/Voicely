@@ -16,11 +16,9 @@ connectDB();
 require('colors');
 
 // // route files
-// const article = require('./api/article');
-// const auth = require('./api/auth');
-// const user = require('./api/user');
-// const requestArticle = require('./api/request_article')
-// const feedback = require('./api/feedback');
+const auth = require('./api/auth');
+const user = require('./api/user');
+const voicely = require('./api/voicely');
 
 const app = express();
 
@@ -57,11 +55,9 @@ const options = {
 app.use(express.static(path.join(__dirname, './public'), options));
 
 // Use Routes
-// app.use('/api/v1/article', article);
-// app.use('/api/v1/auth', auth);
-// app.use('/api/v1/user', user);
-// app.use('/api/v1/request', requestArticle);
-// app.use('/api/v1/feedback', feedback);
+app.use('/api/v1/auth', auth);
+app.use('/api/v1/user', user);
+app.use('/api/v1/voicely', voicely);
 
 const root = require('path').join(__dirname, 'public', 'build')
 app.use(express.static(root));
