@@ -26,7 +26,7 @@ async def noise_rm():
     noise_clip = original_wav/snr
     noise_reduced = nr.reduce_noise(audio_clip=original_wav, noise_clip=noise_clip, verbose=False)
     sf.write(output_path, noise_reduced.astype(np.float64), sampling_rate)
-    return {"Message": "Status 200 ok"}
+    return {"Message": "Status 200 application is ok"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
