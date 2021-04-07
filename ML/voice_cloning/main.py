@@ -10,14 +10,14 @@ import noisereduce as nr
 
 app = FastAPI()
 
-@app.get("/clone")
+@app.get("/api/ml/clone")
 async def cloned_voice():
     message =  "/home/lite/voice_cloning/Voicely/ML/voice_cloning/sounds/data.wav"
     sentence = "This is the trial voice cloning application programmable interface which need some more perfection"
     name = generate_coloned_voice(message,sentence)
     return {"Message":f"New wav file is generated with the name of {name}"}
 
-@app.get("/noise")
+@app.get("/api/ml/noise")
 async def noise_rm():
     input_path = "./sounds/data.wav"
     output_path = "./sounds/output_data.wav"
