@@ -1,17 +1,16 @@
 {
-  "name": "anubhav-backend",
+  "name": "voicely-backend",
   "version": "1.0.0",
-  "description": "This is backend of Project Anubhav",
+  "description": "This is backend of Project Voicely",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "keywords": [
-    "AITOSS",
-    "Anubhav"
+    "voicely"
   ],
-  "author": "Satya, Akshay",
+  "author": "The Pack",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
