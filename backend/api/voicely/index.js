@@ -1,7 +1,8 @@
 const express = require('express');
-const {voicely} = require('./controller');
-// eslint-disable-next-line new-cap
+const {voicely, save_audio} = require('./controller');
 const router = express.Router();
+
 router.route('/').get(voicely);
-// router.route('/reset').get(updatePassword);
+router.route('/save-audio').post(save_audio);
+
 module.exports = router;

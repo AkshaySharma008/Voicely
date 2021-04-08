@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AddService } from 'src/app/services/add.service';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -11,14 +13,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class LetsVoicelyComponent implements OnInit {
 
-  constructor( private audioRecorderService: NgAudioRecorderService ,private formBuilder: FormBuilder) { 
-    this.audioRecorderService.recorderError.subscribe(recorderErrorCase => {
-      // Handle Error
-  })
+  constructor( private addService: AddService,private formBuilder: FormBuilder, private http: HttpClient) { 
   }
 
   public blobUrl;
   audioUploadForm:FormGroup;
+  public convertedText;
 
   ngOnInit(): void {
     this.audioUploadForm = this.formBuilder.group({
@@ -26,36 +26,21 @@ export class LetsVoicelyComponent implements OnInit {
     })
   }
 
-  startRecording() {
-    this.audioRecorderService.startRecording();
+  public audio_file;
+  onUpload(evnt){
+    console.log(evnt.target.files[0]);
+    this.audio_file = evnt.target.files[0]
   }
 
-  stopRecording() {
-     this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB_URL).then((output) => {
-        // do post output steps
-        this.blobUrl = output;
-        console.log(this.blobUrl);
-        // this.sendAudioFile(this.blobUrl);
+  sendAudioFile() {
+    const formData = new FormData;
+    formData.append('audio', this.audio_file);
+    this.addService.saveAudio(formData).subscribe((res:any) => {
+      console.log(res);
+      this.convertedText = res.data;
+    })
 
-     }).catch(errrorCase => {
-         // Handle Error
-         console.log('error aae');
-         console.log(errrorCase)
-     });
-  }
-
-  onUpload(e){
-    console.log(e);
-  }
-
-  // sendAudioFile = file => {
-  //   const formData = new FormData();
-  //   formData.append('audio-file', file);
-  //   return fetch(this.blobUrl, {
-  //     method: 'POST',
-  //     body: formData
-  //   });
-  // };
-
+    
+  };
 
 }
