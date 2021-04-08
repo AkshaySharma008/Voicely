@@ -20,6 +20,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './voicely/home/home.component';
 import { LetsVoicelyComponent } from './voicely/lets-voicely/lets-voicely.component';
 
+import { NgAudioRecorderModule } from 'ng-audio-recorder';
+
+
 
 
 @NgModule({
@@ -59,6 +62,7 @@ import { LetsVoicelyComponent } from './voicely/lets-voicely/lets-voicely.compon
     NbToastrModule.forRoot(),
     NbSearchModule,
     NbListModule,
+    NgAudioRecorderModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
