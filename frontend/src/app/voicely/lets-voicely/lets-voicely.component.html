@@ -3,25 +3,38 @@
       <nb-stepper orientation="horizontal">
         <nb-step [label]="labelOne">
           <ng-template #labelOne>First step</ng-template>
-          <h4>Let's Record !!!</h4>
+          <h4>Welcome to the First step.</h4>
            
           <p class="lorem">
-            Now you can simply upload your voice recording and with the help of Voicely, your digital assistance, you will get correct language spoken in your language.
+            Either record your audio by clicking the button below or upload a pre-recorded text.
           </p>
 
-          <div class="card col-md-6 m-auto shadow">
+          <div class="col-md-6 m-auto">
             <div class="card-body">
               <h5 class="text-center"> Voicely Recorder </h5>
               <div class="text-center">
-                <button type="button" class="btn btn-success p-2 m-2" (click)="startRecording()">Start Recording</button> 
-                <button type="button" class="btn btn-danger p-2 m-2"  (click)="stopRecording()">Stop Recording</button>
+                <button type="button" class="btn btn-success p-2 m-2">Start Recording</button> 
+                <button type="button" class="btn btn-danger p-2 m-2">Stop Recording</button>
               </div>
             </div>
           </div>
+          <hr/>
+          <div class="col-md-6 m-auto">
+            <div class="card-body">
+              <h5 class="text-center"> Voicely Uploader </h5>
+              <div class="text-center">
+                <form [formGroup]="audioUploadForm" >
+                  <input type="file"  accept="video/mp4,image/png,image/jpeg,mp3,wav" (change)="onUpload($event)" formControlName="audio" />
+                  <!-- <button type="submit"> Upload</button> -->
+                </form>
+              </div>
+            </div>
+          </div>
+          
 
           <br><br>
           <button nbButton disabled nbStepperNext>prev</button>
-          <button nbButton nbStepperNext>next</button>
+          <button nbButton nbStepperNext (click)="sendAudioFile()">next</button>
         </nb-step>
         <nb-step [label]="labelTwo">
           <ng-template #labelTwo>Second step</ng-template>
@@ -29,18 +42,19 @@
           <p class="lorem">
             Great, you are here then you must have something already recorded to feed Voicely. In case, you don't have or wanted to record again, visit step 1.
           </p>
+            <textarea nbInput [value]="convertedText"></textarea><br>
 
-          <div class="card col-md-6 m-auto">
+
+          <!-- <div class="card col-md-6 m-auto">
             <div class="card-body">
               <h5 class="text-center"> Voicely Uploader </h5>
               <div class="text-center">
                 <form [formGroup]="audioUploadForm" >
                   <input type="file"  accept="video/mp4,image/png,image/jpeg,mp3,wav" (upload)="onUpload($event)" formControlName="audio" />
-                  <!-- <button type="submit"> Upload</button> -->
                 </form>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <button nbButton nbStepperPrevious>prev</button>
           <button nbButton nbStepperNext>next</button>

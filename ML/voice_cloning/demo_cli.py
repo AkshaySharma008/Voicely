@@ -10,6 +10,7 @@ import librosa
 import argparse
 import torch
 import os
+warehouse_path = '../../Warehouse/'
 
 
 parser = argparse.ArgumentParser(
@@ -133,7 +134,7 @@ def generate_coloned_voice(message,sentence):
                 
             # Save it on the disk
             global num_generated
-            filename = "sounds/output/demo_output_%02d.wav" % num_generated
+            filename = warehouse_path + "output_%02d.wav" % num_generated
             print(generated_wav.dtype)
             sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
             num_generated += 1

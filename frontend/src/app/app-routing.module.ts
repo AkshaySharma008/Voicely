@@ -13,7 +13,8 @@ const routes: Routes = [
       {path: 'home', component: HomeComponent},
       {path: 'voicely', component: LetsVoicelyComponent}
     ],
-  }
+  },
+  {path: '**', redirectTo: '/app/home'}
 ];
 
 @NgModule({

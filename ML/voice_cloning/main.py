@@ -2,21 +2,33 @@ import uvicorn
 from fastapi import FastAPI
 from demo_cli import *
 from pydantic import BaseModel
+from voice2text import *
 
-
+warehouse_path = '../../Warehouse/'
 app = FastAPI()
 
+# 3 API hit with correct message and audio file_name
 class Voice(BaseModel):
     path : str
     message : str
 @app.post("/api/ml/clone")
 async def cloned_voice(request: Voice):
-    path =  request.path
+    path =  warehouse_path + request.path
     message = request.message
     print(path,message)
-    name = generate_coloned_voice(path,message)
-    return {"Message":f"New wav file is generated with the name of {name}"}
+    file_name = generate_coloned_voice(path,message)
+    return {"output_file":file_name}
 
+
+# 1 API Hit from node.js
+class Speech(BaseModel):
+    file_name : str
+@app.post("/api/ml/speech-to-text")
+async def speect_to_text(request: Speech):
+    request.file_name = warehouse_path + request.file_name
+    result = retrieve_transcript(request.file_name)
+    return {"Output": result }
+    
 # @app.get("/api/ml/noise")
 # async def noise_rm():
 #     input_path = "./sounds/data.wav"
