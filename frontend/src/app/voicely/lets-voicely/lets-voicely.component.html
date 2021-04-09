@@ -1,8 +1,11 @@
-<nb-card>
+<div class="my-overlay" *ngIf="showOverlay">
+  <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+</div>
+<nb-card [nbSpinner]="showOverlay">
     <nb-card-body>
       <nb-stepper orientation="horizontal">
         <nb-step [label]="labelOne">
-          <ng-template #labelOne>First step</ng-template>
+          <ng-template #labelOne>Upload Audio</ng-template>
           <h4>Welcome to the First step.</h4>
            
           <p class="lorem">
@@ -23,8 +26,8 @@
             <div class="card-body">
               <h5 class="text-center"> Voicely Uploader </h5>
               <div class="text-center">
-                <form [formGroup]="audioUploadForm" >
-                  <input type="file"  accept="video/mp4,image/png,image/jpeg,mp3,wav" (change)="onUpload($event)" formControlName="audio" />
+                <form [formGroup]="audioUploadForm" class="form-group">
+                  <input type="file" class="form-control-file"  accept="video/mp4,image/png,image/jpeg,mp3,wav" (change)="onUpload($event)" formControlName="audio" />
                   <!-- <button type="submit"> Upload</button> -->
                 </form>
               </div>
@@ -33,36 +36,55 @@
           
 
           <br><br>
-          <button nbButton disabled nbStepperNext>prev</button>
+          <button nbButton disabled nbStepperNext>prev</button>&nbsp;
           <button nbButton nbStepperNext (click)="sendAudioFile()">next</button>
         </nb-step>
         <nb-step [label]="labelTwo">
-          <ng-template #labelTwo>Second step</ng-template>
-          <h4>Upload Audio</h4>
+          <ng-template #labelTwo>Correction</ng-template>
+          <h4>Corrected Transcript</h4>
           <p class="lorem">
-            Great, you are here then you must have something already recorded to feed Voicely. In case, you don't have or wanted to record again, visit step 1.
+            Your audio has been corrected by our smart AI-assistant. Please re-verify the correction.
+            <br><br>
+            <i>If you want, you can even change the text altogether.</i>
           </p>
-            <textarea nbInput [value]="convertedText"></textarea><br>
+          <form [formGroup]="correctedTextForm" class="form-group col-md-10 container">
+            <div>
+              <label>Original Transcript</label>
+              <textarea disabled formControlName="inputText" rows="5" class="form-control"></textarea>
+            </div>  
+            
+            <div>
+              <label>Corrected transcript</label>
+              <textarea formControlName="correctedText" rows="5" class="form-control"></textarea>
+            </div>
+          </form>
 
-
-          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperPrevious>prev</button>&nbsp;
           <button nbButton nbStepperNext (click)="cloneAudio()">next</button>
         </nb-step>
         <nb-step label="Third step">
-          <h4>Preview Content & listen to your voice</h4>
+          <h4>Corrected Voice!</h4>
           <p class="lorem">
-            Look how you have spoken and verify is this the same audio, you want to convert via Voicely.
+            Hey there, I have converted your audio and corrected it to the best format. <br><br>
+            <b>Go ahead and listen to it. You can also download it.</b>
           </p>
-          <button nbButton nbStepperPrevious>prev</button>
+          <div class="container text-center m-3">
+            <audio controls style="width: 600px;" [src]="s3Link">
+              Your browser does not support the
+              <code>audio</code> element.
+            </audio>
+          </div>
+          <button nbButton nbStepperPrevious>prev</button>&nbsp;
           <button nbButton nbStepperNext>next</button>
         </nb-step>
         <nb-step [label]="labelFour">
           <ng-template #labelFour>Fourth step</ng-template>
-          <h4>Let's Voicely :)</h4>
+          <h4>Hurray, you have successfully smartened your audio speech !</h4>
           <p class="lorem">
-            Look at the magic of Voicely !!!
+            More information on this input audio will be shown in statistics and history. <br>
+            Do Check it out, for a better analysis !
           </p>
-          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperPrevious>prev</button>&nbsp;
           <button nbButton disabled nbStepperNext>next</button>
         </nb-step>
       </nb-stepper>
