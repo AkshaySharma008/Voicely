@@ -11,7 +11,7 @@ export class VoicelyComponent implements OnInit {
 
   constructor(private fetchService: FetchService, private sidebarService: NbSidebarService) { }
 
-  public user = {name: "Satya Prakash"};
+  public user = {name: "The Pack"};
 
   ngOnInit(): void {
     this.fetchService.checkAPIServices().subscribe((res:any) => {
