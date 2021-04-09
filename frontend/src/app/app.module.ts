@@ -21,6 +21,12 @@ import { HomeComponent } from './voicely/home/home.component';
 import { LetsVoicelyComponent } from './voicely/lets-voicely/lets-voicely.component';
 
 import { NgAudioRecorderModule } from 'ng-audio-recorder';
+import { StatisticsComponent } from './voicely/statistics/statistics.component';
+
+import * as PlotlyJS from 'plotly.js/dist/plotly.js';
+import { PlotlyModule } from 'angular-plotly.js';
+PlotlyModule.plotlyjs = PlotlyJS;
+
 
 
 
@@ -30,7 +36,8 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     AppComponent,
     VoicelyComponent,
     HomeComponent,
-    LetsVoicelyComponent
+    LetsVoicelyComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +69,9 @@ import { NgAudioRecorderModule } from 'ng-audio-recorder';
     NbToastrModule.forRoot(),
     NbSearchModule,
     NbListModule,
-    NgAudioRecorderModule
+    NgAudioRecorderModule,
+    PlotlyModule
+
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
