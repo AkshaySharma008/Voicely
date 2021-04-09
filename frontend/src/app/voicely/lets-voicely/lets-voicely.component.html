@@ -25,9 +25,9 @@
           <div class="col-md-6 m-auto">
             <div class="card-body">
               <h5 class="text-center"> Voicely Uploader </h5>
-              <div class="text-center">
-                <form [formGroup]="audioUploadForm" class="form-group">
-                  <input type="file" class="form-control-file"  accept="video/mp4,image/png,image/jpeg,mp3,wav" (change)="onUpload($event)" formControlName="audio" />
+              <div class="card text-center">
+                <form [formGroup]="audioUploadForm" class="form-group pt-3 pl-3">
+                  <input type="file" class="form-control-file "  accept="video/mp4,image/png,image/jpeg,mp3,wav" (change)="onUpload($event)" formControlName="audio" />
                   <!-- <button type="submit"> Upload</button> -->
                 </form>
               </div>
