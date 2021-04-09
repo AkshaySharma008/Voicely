@@ -38,7 +38,7 @@ export class VoicelyComponent implements OnInit {
     {
       title: 'Statistics',
       icon: 'activity-outline',
-      link: '/app/report'
+      link: '/app/statistics'
     },
     {
       title: 'My History',
