@@ -16,8 +16,23 @@
             <div class="card-body">
               <h5 class="text-center"> Voicely Recorder </h5>
               <div class="text-center">
-                <button type="button" class="btn btn-success p-2 m-2">Start Recording</button> 
-                <button type="button" class="btn btn-danger p-2 m-2">Stop Recording</button>
+                <button type="button" (click)="initiateRecording()" *ngIf="!recording" class="btn btn-success p-2 m-2">Start Recording</button> <br>
+                <button type="button" (click)="stopRecording()" *ngIf="recording" class="btn btn-danger p-2 m-2">Stop Recording</button><br>
+                <img *ngIf="recording" src="https://media3.giphy.com/media/U8GtXtxM2XFhS/source.gif" height="200px" width="600px" />
+                <br>
+                <audio controls="" *ngIf="url">
+                  <source [src]="sanitize(url)" type="audio/wav">
+                </audio>
+
+                <!-- <div style="text-align:center;margin-top: 200px;" >
+                  <button (click)="initiateRecording()" class="btn btn-primary" *ngIf="!recording" style="cursor: pointer;background-color: green;color: white;font-size: 40px;"> Start Recording </button>
+                  <button (click)="stopRecording()" class="btn btn-danger" *ngIf="recording" style="cursor: pointer;background-color: red;color: white;font-size: 40px;"> Stop Recording </button>
+                  <audio controls="" *ngIf="url">
+                    <source [src]="sanitize(url)" type="audio/wav">
+                  </audio>
+                </div> -->
+
+
               </div>
             </div>
           </div>
@@ -27,7 +42,7 @@
               <h5 class="text-center"> Voicely Uploader </h5>
               <div class="card text-center">
                 <form [formGroup]="audioUploadForm" class="form-group pt-3 pl-3">
-                  <input type="file" class="form-control-file "  accept="video/mp4,image/png,image/jpeg,mp3,wav" (change)="onUpload($event)" formControlName="audio" />
+                  <input type="file" class="form-control-file"  accept="audio/*" (change)="onUpload($event)" formControlName="audio" />
                   <!-- <button type="submit"> Upload</button> -->
                 </form>
               </div>

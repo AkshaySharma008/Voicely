@@ -34,6 +34,7 @@
     "ng-chartjs": "^0.2.1",
     "ngx-bootstrap": "^6.2.0",
     "plotly.js": "^1.58.4",
+    "recordrtc": "^5.6.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "typewriter-effect": "^2.17.0",
