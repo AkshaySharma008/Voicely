@@ -45,19 +45,8 @@
             <textarea nbInput [value]="convertedText"></textarea><br>
 
 
-          <!-- <div class="card col-md-6 m-auto">
-            <div class="card-body">
-              <h5 class="text-center"> Voicely Uploader </h5>
-              <div class="text-center">
-                <form [formGroup]="audioUploadForm" >
-                  <input type="file"  accept="video/mp4,image/png,image/jpeg,mp3,wav" (upload)="onUpload($event)" formControlName="audio" />
-                </form>
-              </div>
-            </div>
-          </div> -->
-
           <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
+          <button nbButton nbStepperNext (click)="cloneAudio()">next</button>
         </nb-step>
         <nb-step label="Third step">
           <h4>Preview Content & listen to your voice</h4>

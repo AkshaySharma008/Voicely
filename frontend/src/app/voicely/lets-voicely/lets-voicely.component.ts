@@ -19,6 +19,7 @@ export class LetsVoicelyComponent implements OnInit {
   public blobUrl;
   audioUploadForm:FormGroup;
   public convertedText;
+  public audio_path;
 
   ngOnInit(): void {
     this.audioUploadForm = this.formBuilder.group({
@@ -38,9 +39,14 @@ export class LetsVoicelyComponent implements OnInit {
     this.addService.saveAudio(formData).subscribe((res:any) => {
       console.log(res);
       this.convertedText = res.data;
+      this.audio_path = res.audio_file_name;
     })
-
-    
   };
+
+  cloneAudio() {
+    this.addService.cloneAudio({path: this.audio_path, message: this.convertedText}).subscribe((res:any)=>{
+      console.log(res);
+    })
+  }
 
 }

@@ -11,6 +11,7 @@ import argparse
 import torch
 import os
 warehouse_path = '../../Warehouse/'
+import datetime
 
 
 parser = argparse.ArgumentParser(
@@ -60,7 +61,7 @@ else:
 print("Interactive generation loop")
 num_generated = 0
 
-def generate_coloned_voice(message,sentence):
+def generate_coloned_voice(path,sentence):
     trial = 1
     while trial:
         trial -= 1
@@ -68,11 +69,13 @@ def generate_coloned_voice(message,sentence):
             ## Load the models one by one.
             print("Preparing the encoder, the synthesizer and the vocoder...")
             encoder.load_model(args.enc_model_fpath)
+            print("line 71")
             synthesizer = Synthesizer(args.syn_model_fpath)
+            print("line 73")
             vocoder.load_model(args.voc_model_fpath)
-
-            in_fpath = Path(message.replace("\"", "").replace("\'", ""))
-
+            print("line 75")
+            in_fpath = Path(path.replace("\"", "").replace("\'", ""))
+            print("line 77")
             if in_fpath.suffix.lower() == ".mp3" and args.no_mp3_support:
                 print("Can't Use mp3 files please try again:")
                 continue
@@ -133,13 +136,16 @@ def generate_coloned_voice(message,sentence):
             generated_wav = encoder.preprocess_wav(generated_wav)
                 
             # Save it on the disk
-            global num_generated
-            filename = warehouse_path + "output_%02d.wav" % num_generated
+            num_generated = datetime.datetime.now()
+            num_generated = datetime.datetime.timestamp(num_generated)
+            num_generated = str(num_generated)
+            num_generated = num_generated.replace('.','')
+            actual_name = "output_%s.wav" % num_generated
+            filename = warehouse_path + actual_name
             print(generated_wav.dtype)
             sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
-            num_generated += 1
             print("\nSaved output as %s\n\n" % filename)
-            return filename
+            return actual_name
         except Exception as e:
             print("Caught exception: %s" % repr(e))
             print("Restarting\n")
