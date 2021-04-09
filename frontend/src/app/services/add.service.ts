@@ -15,4 +15,11 @@ export class AddService {
       data
     );
   }
+
+  cloneAudio(data) {
+    return this.httpClient.post(
+      `/api/v1/voicely/clone`,
+      data
+    );
+  }
 }
