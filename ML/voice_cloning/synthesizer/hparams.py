@@ -20,7 +20,7 @@ class HParams(object):
 
 hparams = HParams(
         ### Signal Processing (used in both synthesizer and vocoder)
-        sample_rate = 16000,
+        sample_rate = 15000,
         n_fft = 800,
         num_mels = 80,
         hop_size = 200,                             # Tacotron uses 12.5 ms frame shift (set to sample_rate * 0.0125)
