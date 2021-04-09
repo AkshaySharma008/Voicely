@@ -88,6 +88,7 @@ def generate_coloned_voice(path,sentence):
             preprocessed_wav = encoder.preprocess_wav(in_fpath)
             # - If the wav is already loaded:
             original_wav, sampling_rate = librosa.load(str(in_fpath))
+            print("*********Sampling Rate: %s ***********" % sampling_rate)
             preprocessed_wav = encoder.preprocess_wav(original_wav, sampling_rate)
             print("Loaded file succesfully")
             
