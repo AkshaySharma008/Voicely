@@ -10,7 +10,7 @@ This application is like a Grammarly for Voice. It will feed your voice and will
 What things you need to install the software and how to install them
 1. Python (>=Python 3.0)
 2. Node
-3. Flask
+3. FastApi
 4. Angular 9+
 
 ### Running the Platform
