@@ -1,6 +1,8 @@
 # Voicely
 A Digital Voice Assistant Application 
 
+![Voicely](https://github.com/AkshaySharma008/Voicely/blob/main/frontend/src/assets/Voicely.png)
+
 This application is like a Grammarly for Voice. It will feed your voice and will return you back with the corrrected text grammatically in your own voice.
 
 ### Prerequisites
