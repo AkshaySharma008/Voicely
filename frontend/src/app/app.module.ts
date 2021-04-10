@@ -25,6 +25,7 @@ import { StatisticsComponent } from './voicely/statistics/statistics.component';
 
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
+import { UnderDevelopmentComponent } from './voicely/under-development/under-development.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 
 
@@ -37,7 +38,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     VoicelyComponent,
     HomeComponent,
     LetsVoicelyComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    UnderDevelopmentComponent
   ],
   imports: [
     BrowserModule,
