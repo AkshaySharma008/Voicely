@@ -60,8 +60,7 @@ Run `python3 main.py`
 
 ## Important Links
 * Presentation - [PPT Link](https://www.canva.com/design/DAEYSuGT9-w/CL-jDSQ9FA1tlGDXGV_uYA/view?utm_content=DAEYSuGT9-w&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
-* Video Link - [Youtube Video](https://youtu.be/H4cZBT86_ok)
-* Submission Link - [Submission Link](https://devpost.com/software/sanket)
+* Video Link - [Youtube Video](https://www.youtube.com/watch?v=HAomllFsMFo)
 
 
 ## Authors
