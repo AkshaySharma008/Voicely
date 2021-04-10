@@ -28,7 +28,7 @@ export class VoicelyComponent implements OnInit {
     {
       title: 'Clone Voice',
       icon: 'headphones-outline',
-      link: '/app/clone'
+      link: '/app/inProgress'
     },
     {
       title: 'Let\'s Voicely',
@@ -43,12 +43,12 @@ export class VoicelyComponent implements OnInit {
     {
       title: 'My History',
       icon: 'archive-outline',
-      link: '/app/history'
+      link: '/app/inProgress'
     },
     {
       title: 'Logout',
       icon: 'unlock-outline',
-      link: '/auth/logout'
+      link: '/app/inProgress'
     },
   ];
 
