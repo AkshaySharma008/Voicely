@@ -64,12 +64,6 @@ Run `python3 main.py`
 * Submission Link - [Submission Link](https://devpost.com/software/sanket)
 
 
-
-## Mentors Suggestion
-* Suggestion 1 - To make the user voice input multilingual. (Completed)
-* Suggestion 2 - To build the other of communication i.e from Sign Language to Transcript. (Completed)
-
-
 ## Authors
 
 * **Satya Prakash** - [satya9500](https://github.com/satya9500)
