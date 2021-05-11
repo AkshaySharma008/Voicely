@@ -92,7 +92,7 @@ export class LetsVoicelyComponent implements OnInit {
       audio: true,
     };
     navigator.mediaDevices
-      .getUserMedia(mediaConstraints)
+      .getUserMedia({video: false, audio: true})
       .then(this.successCallback.bind(this), this.errorCallback.bind(this));
   }
   /**
