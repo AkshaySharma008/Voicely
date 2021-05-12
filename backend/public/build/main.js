@@ -831,7 +831,7 @@ class HomeComponent {
     }
 }
 HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(); };
-HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 30, vars: 0, consts: [[1, "main"], [1, "mb-5"], ["src", "../../../assets/Voicely.png", "alt", "Voicely", 1, "col-md-12"], [1, "col-md-12", "row", "my-5"], [1, "col-md-12"], ["status", "danger"], [1, "font-weight-bold"], [1, "col-md-10", "m-auto"], ["src", "../../../assets/Voicely-Story.png", "alt", "story", 1, "col-md-12"], [1, "text-center", "m-5", "p-3"], [2, "color", "coral"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 30, vars: 0, consts: [[1, "main"], [1, "mb-5"], ["src", "../../../assets/Voicely.jpeg", "alt", "Voicely", 1, "col-md-12"], [1, "col-md-12", "row", "my-5"], [1, "col-md-12"], ["status", "danger"], [1, "font-weight-bold"], [1, "col-md-10", "m-auto"], ["src", "../../../assets/Voicely-Story.png", "alt", "story", 1, "col-md-12"], [1, "text-center", "m-5", "p-3"], [2, "color", "coral"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 2);
