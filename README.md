@@ -72,4 +72,4 @@ Run `python3 main.py`
 
  ## Acknowledgments
 
-* Made with &#9829; during Rackathon 2021 in 24 hrs.
+* Made with &#9829; during Azure Developer League Hackathon 2021.
