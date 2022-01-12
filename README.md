@@ -1,5 +1,5 @@
 # Voicely
-A Digital Voice Assistant Application 
+A Digital Voice Assistant Application!
 
 ![Voicely](https://github.com/AkshaySharma008/Voicely/blob/main/frontend/src/assets/Voicely.png)
 
